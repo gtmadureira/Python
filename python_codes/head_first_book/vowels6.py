@@ -20,26 +20,32 @@ for letter in word:
 
 for k, v in sorted(found.items()):
 
-  print(k, 'was found', v, 'times(s)')
+  if v > 1:
+
+    print('The volwel (', k, ') was found (', v, ') times.')
+
+  else:
+
+    print('The volwel (', k, ') was found (', v, ') time.')
 
 
 
 '''
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6RDI8ACgkQBXQppWFa
-stla5BAAjHU3n9ixcOVSr3z+rd/xgX00Naz3VcGeISZe/h6xl1fyS1DfTDbWfUcy
-tr2Oukbo96SPHbvQXTDMfr6IKIFtbDx/NL2Y9gJgR92Q6K7NgTNSynTK16mHaiJq
-YAAjSNUsS/mi3I/UlFLn5K+B+lJVWgQBkgwb0VnmC+VPf1saGmpH3k15H3b2hAiU
-qZS1LHIUY/CUrlqPi8gMCJGav11O5/94Lcs/9EMoLs2WjC/+VnirwL2tzoX8ycUs
-3QsxN5aiyaPprZp+aL/V7stKNzdL3YeG8YTcyKm4+fF9LbFbcIufxFLgC9DZqAfh
-gox9z4JA3NACRotvPlUKL5RhI/dWYlqmWQxMFTSIL5Y9LT5bRsWUL1O8yLQODiJ2
-JgXgw3LBkmdMVNELjbpalfJSrkpF7iFMAeCtyZRCgpN7/EvlLnHCqQzpvuV8CWHr
-rqiljr1IcRvrSTPEhO02Cn2ouKpmgMZC0xyOr/yYHrfyTlr9bvrSNfLojy9RuNFp
-1DR57vY7Cr/1/e1wRRuuqfXG0UfO5rwzRfTWCK9BbrzCrdWc8yZKmgHmn+h/RSc8
-o1qX+r1SgVOJAN+iQtExiLw5g1F5vxsXxsxds6uMCNihUA87RwnR35XA+uHmZY9z
-9USljgXO9LcpgI8Q/LSXte8GyhftW2cNTH8FQnH1UW69YeBih+E=
-=a+RS
+iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6TwKwACgkQBXQppWFa
+stkFSw/+LCkehDExriFKE9J6NlfssSidbhbinDPR6Io2Nxg+kJIugdoJBTsx3NC5
+mVECfWkQ7pki2TlyHY2MJB3tjvinr0rBeXfm05sR3ThM5kzVrocsRjbdWgSaMR8U
+dDTpXpBxQgWGgXytxwD7e2vWeZ0xi/O+VV0MX14Ru6IC52lvBCL4RZo4zOcvKpRl
+lkIjLFZ+BvtL47nhbaULUgUG+Qm8PZiR99f7ImuXQBd4qjTMNzWPoCWfDQKWTvOX
+3cAIdpJUDxmLTkdojwrWJO8pgpKxwBbihzKc/5J7j0DLTAhjANmERpAJmgpsXc+F
+f+V1Ao6Uu3VLRdkqxSS1m41yZm+n6ZNLxfhWLMdH1o7OzfMSCMrQLEdNJz9ftB2H
+yU8/dLKlVfNfAkRczLHGrF6K5f8gpTlI8rl9V8zZm3jxAiSm6j5Mk3F31SBhADxQ
+kg3AE23nq0if+OfHsV+PAgE37xABhbl/F9M086xSivEAvyGYz3VcX/etATbsnPUC
+gwIjH7RD0SpmpN31Itddu4wyyYmFYACDBeaaeKkBtuXBkBe1CtvS0n5VpT6KPBrz
+52dw7c9UwiF8Gfpx9sJ1mvntEBhJtGyHtVeHc/mbIEQqAGTjK0r0bUgCePlPzaZS
+m2pHTJzrL9A4l7J/z4fpXnhFN8MzXpwGmeyV5a4/kKtclbE3PWM=
+=RFIo
 -----END PGP SIGNATURE-----
 
 '''
