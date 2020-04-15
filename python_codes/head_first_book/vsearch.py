@@ -7,48 +7,39 @@ Hash: SHA256
 
 
 
-def search4vowels_sorted(word):
+def search4vowels(phrase:str) -> set:
 
-    """ Sorted and display any vowels found in a supplied word. """
-
-    vowels = set('aeiou')
-    found = vowels.intersection(set(word))
-    found = sorted(found)
-
-    for vowel in found:
-
-        print(vowel)
-
-
-def search4vowels_unsorted(word):
-
-    """ Display any vowels found in a supplied word. """
+    """ Return any vowels found in a supplied phrase. """
 
     vowels = set('aeiou')
-    found = vowels.intersection(set(word))
 
-    for vowel in found:
+    return vowels.intersection(set(phrase))
 
-        print(vowel)
+
+def search4letters(phrase:str, letters:str='aeiou') -> set:
+
+    """ Return a set of the 'letters' found in phrase. """
+
+    return set(letters).intersection(set(phrase))
 
 
 
 """
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6VSmIACgkQBXQppWFa
-stkTpxAAmJjjlqurtIXz9xPmLs3j6Y71CCnYrwDOmq5vgZ4D1OiwP9kI/3de8Mky
-ZR7bDxOLs9xD1+5RnsfQdAYz7a9KQlqi8T1X4XN71YwTS6GpNJJzs9R1Zl4A7cig
-F1OdL6w4D0JgWobkefFM/LBVUxCOMD95evNqrNf9DCYPv9Wz57Hhx68f8iS8Bo95
-MBCspOBwHqDi6KJETuQuKkK0iSfXyMaVRVfG3YuOvJQn3Gy8nYdBRhM1sEm5rWxR
-HOgyGBDsFV4I9xvDJRkeV5pcjJ70IdtrvgLRIUYuV6LqIPj6lEWNXfoU62V+aazf
-moho18XhZHjFN2Zk6q6oEZ7w6Aaa4b7nlqIvxLRaAaeimGbd107BAYJwavh/DZKP
-z3aE99Adjp1wstHFzmXxzT2uP9YmSw2OwXzbeJlsXPGL+gpAMY7i73lt1aR0WyYq
-b5MXPiJK6rgQiIAFh2ONRvCZg2eID0m7cKcAsYsDtMl54b8+EVRXErrPE12RPV2J
-joTOo6/qqaGZFtPKy38QjjTjJx7EretoWNwHmDvn6aRa0tzr7YVX+59S7qcSPFX0
-gHREHghL+Po6rHaBpY4OlKfRbS/Umql5Vsp5cA+fj5e85tSpt8fALXWJP4mZ8exb
-2oD5pW1gyu2HXbNZgRo44eR3QqCk6d4AN4RiRpahIwVayBB5qIA=
-=rogF
+iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6WhIsACgkQBXQppWFa
+stmQFg/6An8MCcSneA7hNV7SVxoYZZqN4uzmd4c+lqKy5hK01yq+h3yACDeA9DZF
+D/8p5DRtvu/T0zMV1frcPo+3r3bBa1rmXHy4g/wddXc+Tawves43ttI5XN7sVEH3
+1Ns2c48etvF5hfkP1F0wkhp4EyDMFkdWHJmJieAccekM/hH5C7dKMJ/3GSre4JW2
+Yk8+5YypL7OiPekhqlf1Y8gbmtIzZBsxjnsxIaSUQWixQa31NVLBSQKoGwpedTfq
+3t+PJIP+tziF7H5Kgh7QpoQDzdX3UkZ6sTbo+5sAW8i6v1OhGAxg/zRK64dPGnSg
+CKX9ItrfIOsEgpxorCM5z4aZouOntLgSSBvGSn6bRjkn5n5Inhio1qhDNZr8cifq
+1omUFSZqZ/E7UwrYNAeAh5sFPcZXshU/kavc0yZDE2aFOdSmyeIhCfGN5jjDyDWt
+8LoP73pKTG5EECkH/BHb8DA5H/gPzHwpYIgHdOiFDhAj7N+ac7QkdOXyjAv/eTWs
+TIcLE9qEI/6NYWLJIsWBXflTkIW7vqon0ls44+UPe+DCXDmKalN0Cc1rnfTXAXsK
+X7QNwLvCJtNQZF8S07IY0ZzU1zA6DKhNPbZjM1HpMC/0zFj0xngIS6R0KVb4ZIUe
+lMGa+PpGSbszKt4db7GE65AY1CSIOKYyACGd59b+Zlzgmpl6XOk=
+=WOHs
 -----END PGP SIGNATURE-----
 
 """
