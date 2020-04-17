@@ -1,0 +1,7 @@
+README.txt
+mystery.py
+setup.py
+mystery.egg-info/PKG-INFO
+mystery.egg-info/SOURCES.txt
+mystery.egg-info/dependency_links.txt
+mystery.egg-info/top_level.txt
