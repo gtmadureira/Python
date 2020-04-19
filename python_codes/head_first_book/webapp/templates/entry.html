@@ -1,0 +1,48 @@
+<!--
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+- -->
+
+
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+
+<form method="POST" action="/search4">
+  <table>
+    <p>Use this form to submit a search request:</p>
+    <tr><td>Phrase:</td><td><input name="phrase" type="TEXT" width="60"></td></tr>
+    <tr><td>Letters:</td><td><input name="letters" type="TEXT" value="aeiou"></td></tr>
+  </table>
+  <p>When you're ready, click this button:</p>
+  <p><input value="Do it!" type="SUBMIT"></p>
+</form>
+
+{% endblock %}
+
+
+
+<!--
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6b3F8ACgkQBXQppWFa
+stm13w//eDaf5aLO/eS6CGkGXMs8cxIj4HXlm0thqTDxiMq5lM922Ix0LCV/ijMP
+PwcYZj/TfewZEiW/ElYFEN14JM+hk+yrM8NwOnh/oWoDLPwAzzP/wkkxa/fL2JWO
+rR0KITh9ZM3LtklWDYivMiLfVEDIUvvIW+q40dYPO7fs2kIy9Z78n++xE8JqkUfL
+La8RFoisQAonGKGWsYt8EAkdtayZQwgg9x1+5B4eCUHpHIA/Be2RlWY5kZ4zmhwN
+J1PX9yn1gwibnY4QP6kSwlw3NNiS0/7gIaGS5Aq8wL3IehuGAtdG/Cg3YOuOR9qS
+p9UfwZt695y2PjB9Q/wjDr0DKOjeIifdK/NHk7YNN6WlFV6eQtfvPVpLdhsn81ms
++qoCyxtKRrKQ6a0vLEKAtKLOXjAb8E4r9CSr7f95q/DUCrQQKTT1rveUFcqcLwkI
+E980MKA4IvU1SDP/Tljc59sHOx9v5GVHqqD/rh3mO/ijiwsSFghvnv5+6MuXbdLF
+aZ7JLWwC5FqUE8novxvll+yHiVawFK4H1riQRqKHeJ2YcdSuz5dQK+m379dL+ILn
+h7lz0KtTb4LmG9OBrdaMBim8vhr5WJv5V3DbaOlGVajgg0nrbu8JpQ8ELDubrl/V
+Q/Z74d/6PpMq1Z2Y8b9JxFBXTMMT2sGvAsnsiW8/VrwSwZrvTA8=
+=7hI8
+-----END PGP SIGNATURE-----
+
+-->
