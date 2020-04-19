@@ -14,43 +14,42 @@ from vsearch import search4letters
 app = Flask(__name__)
 
 
-@app.route('/')
-def hello() -> str:
-    return 'Hello world from Flask!'
-
-
 @app.route('/search4', methods=['POST'])
-def do_search() -> str:
+def do_search() -> 'html':
     phrase = request.form['phrase']
     letters = request.form['letters']
-    return str(search4letters(phrase, letters))
+    title = 'Here are your results:'
+    results = str(search4letters(phrase, letters))
+    return render_template('results.html', the_title=title, the_phrase=phrase, the_letters=letters, the_results=results)
 
 
+@app.route('/')
 @app.route('/entry')
 def entry_page() -> 'html':
     return render_template('entry.html', the_title='Welcome to search4letters on the web!')
 
 
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
 
 """
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6b22oACgkQBXQppWFa
-stmDOQ//XDbzOAVaoKK9TMaorpvxWstzt0jSv+M0I0gC7LhuA+zL/1IcfwA95x6W
-jBCtmUZi9Z9JpqUgUNPvr9rm0vPTCy2aX4VgzYJU7iF3WFaVUCmQry3/Tvnswovn
-exFJJUIovTBzKzOIkR+aRHKjoKbD2qGwM8z2b0s7jAoUFe5USwPRQIgdG/6Kyn+E
-O0MOs9BZywueuXabS2DtaBhSj7DC6uhq5Ka4t41lxP042U1rZMHR7K6CWmN8Roxq
-Z2tnUMSBeSk+ZQGpetOxrw9XQmUTL9N35nGvnQ9ImTKNuorQt3ZYy9EF5yNxyehc
-kjtSWEEqA+A+7B/W8E5BKyhl9C71fspdBkllgF7ALkGYMW+gylmdO9MJqBhHZyES
-W8g5v2INakjIrFUKGgKDkVnpuUYsQBTad/7DIxbxiMRlNOcRZr5qzRCxWi/Mk+0J
-ZOsjkrkBR7Cd9oCgxkQGS/d1OUXds+r4xEPY1jqWyyMTJCzWjWxGhKWj+v8EI1My
-l4Sv1z5LTMaZLqYLFO2BFtmmnQ5aVUxcHhB1xqZ+wl8UBaBo2wLGpm4xFPvV+96D
-m8ty/wvot0yXibK5qLbGDp0jgzqgszOEgu3hSJVCL3oNOilZjjXk/CNNOVcIDxWV
-0Pvor8+ZgvnVppGH2aWxtJqH8o4ZnlkU1PKE3wTgtZIb4rDO4W0=
-=Inal
+iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6cysUACgkQBXQppWFa
+stlGWA/9EVLHeGj1I9cm4fbQz9WW871ork7IML5yItTBXP6tR8TwFJ4BiFttEzGy
+yYZLrinU8SOi6WYNSss3/BbK33keNNGqMJenfeFTNThf6q65xZepEP7SxWUdtBat
+/EQ0uKliw0SWN0PvmsYjaltIj11GtkqK5wJPrFfwKF0rqKRjpbapMxzjpQPVfNtg
+MI8ePQzExG9TmQixk7YNb3HZgz53R3AGD2hUy6DG+rmTKqS5uE4MEtX8W/8OSN9J
+npdLnwrYPn60VEgHElb+VcADA1BcZ0K0sLW1nqfx/EZUniI8t8Nv3qEZJF3LVxDH
+lDHPXHukGfIm9smj80CfKO1jBUxZV6XlhPiCwGgKSyVIZKUZZNfpNL37G1ZDI8XR
+cBLZyIencCZLNUdaIezen0BbiDyIsMvdviEW5xbFKxUXvHpOUXwgv72owl8S2C/1
+MgzhEQ08u3z3uve04J9WowOwQiqNiL+3+Lp5JVkW/yQy0rYcKyWcoEJNj79p+bYl
+eWZAUP2INvZBukB7y+fdiHnHZBkqPd8DzY8v+WZLP9W8pLRva8MXILZVu48lnS12
+mHHDQitKKy9mSWCdDn9BuineOXZeZNIJKS7pbDwwtvCiUo89gcziV7e2I2uE3UZR
+BI56NSx5AvNju50IZFcfODrMpQgUtksFMRs/2ZgnXv+pxVfN4mQ=
+=TP4q
 -----END PGP SIGNATURE-----
 
 """

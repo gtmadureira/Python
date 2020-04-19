@@ -10,7 +10,8 @@ Hash: SHA256
 body {
   font-family:      Verdana, Geneva, Arial, sans-serif;
   font-size:        medium;
-  background-color: tan;
+  background-color: #26292c;
+  color:            #c8e0f9;
   margin-top:       5%;
   margin-bottom:    5%;
   margin-left:      10%;
@@ -36,6 +37,7 @@ table {
   margin-right:     20px;
   caption-side:     bottom;
   border-collapse:  collapse;
+  color:            #c8e0f9;
 }
 td, th {
   padding:          5px;
@@ -57,9 +59,9 @@ td, th {
 
 table {
 font-size:          1em;
-background-color:   #fafcff;
+background-color:   #4b4f53;
 border:             1px solid #909090;
-color:              #2a2a2a;
+color:              #fcfcfc;
 padding:            5px 5px 2px;
 border-collapse:    collapse;
 }
@@ -85,19 +87,19 @@ select {
 /*
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6b3WYACgkQBXQppWFa
-stl8FA//VewVa74vQVXhoIgY1OanFYV1BF1VRQWDt5c7hwFv1RrF0DvwVwBAUpRh
-b14i/bRkqC510Fn/maFmhgyGO1Yn0t+vgrCPsVtNCww9TKRdKndurP2BrroEPI4o
-rIIgBqgzMBbLWcwg59RrcfsL+V8pZZgTJ1X44ZuUI/x2yQcRtHiEt1yDXiJbEjQ0
-N6b64nAnF/IMiUoD+rUpCbkXnnLzU8N2sR5mZvPzILzXu2GtwBMUrLvKfd+ZBGky
-ynB5x8Z/h6Oy4y7stXKk/g5g2JTon/Ndoi//MHwyWHnwh6+W3GJWx+0gCI7VT31J
-xf8ho3dODaGZ5bubzIVygMw3O/yGOJPLLd1UH+4PwDeklpobxOf/JJmuH4zPYVmw
-NzJifP+OSgivVINqqHHk7U1FeMAty9ZxckTJsmKH0oKPqowlXGS5BI7+541aNmIT
-TF9Zp4x1PXGvIxItpkM18qi5ew9B+wFUuhyU5YbBOm5jqi/fRK6r7v7UxSmPUAon
-fcNFWh168fl48ElC6J8s8sw2FHK+mA4ppgrYOvu9LWq+B2Bafg+GscyG612PRY+Z
-aLH0wtcfw42QlYoDK5Pb0MYv0zh4JUeeIruubi1TwSMw39GXaW5r8Sq9t/oYUwk8
-e7s6TkbTYGQuwbXHyUbCSgF4087cPCIj7ND5MrMSELVILmaI9pc=
-=iD4Y
+iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6ctHsACgkQBXQppWFa
+stlsNBAAlD68ItXOuVpZO/LKiMSTXu+f2+6AsHKyQqsQDx+pk0UTbAozQPyg/z+c
+zNgOvTyGMHXodXLCMHnrUc7Nk6OwmX6NpUnhHHFraITRKIPlIG12OJ+wU70EslNT
+gyNUDa1dYA35/EwzSbLJRX/PIAdUXJtqdw5MVy99dxR4bXt2dy5vmyHSWrhe+Hau
+tjFsuDLY81IdGix3U5O53II8tQvwUG44x7U1jJlU9zZcn2EKsee3LXsQSQYxGgDN
+4qsySVT4IRxIQpPJiM+sVjTxyG1SlRTRB5FBrauYC+2/FbhGSWxyg4ddNfWvvKJF
+Wo5F2/4xw3BFwZe7/4+srzv+8hDJuX9pbg/nG4OQwECltPd7fPXyqd2MmToFmS9T
+aG43SvbGe78fETG7ax/RgPH92ztTM9mKqjEo/9wK1nOco1bTDaEYwOoWM2uQqAjv
+cLZd1dFoubkv9lNNGlO0/yVzlawxAxKwKc+BBglKP+bsX2Qdt4ZtQrdqytBwilAj
+bmpU5wjI4qo+DVQF6902Pt+jD+BEIx/ZfBMjnPVtTpw3FT1C6OrlcXPClTzS4/7g
+rP22cuGUCsnmzARYxSniPWXS99ZAbUkXNxiXVVETqdK8Vj0YMDQmYjuI9KmmrHLd
+jRGDKglOMu0BhtQNsZkuQeBLFBBNG5PHQ32GQnnOrFQ4pcaB5yA=
+=Fftn
 -----END PGP SIGNATURE-----
 
 */
