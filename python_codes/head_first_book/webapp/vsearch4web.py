@@ -17,10 +17,8 @@ app = Flask(__name__)
 def log_request(req: 'flask_request', res: str) -> None:
     """Log details of the web request and the results."""
     with open('vsearch.log', 'a') as log:
-        print(req.form, file=log)
-        print(req.remote_addr, file=log)
-        print(req.user_agent, file=log)
-        print(res, file=log)
+        print(req.form, req.remote_addr, req.user_agent, res,
+              file=log, sep='|')
 
 
 @app.route('/search4', methods=['POST'])
@@ -31,22 +29,35 @@ def do_search() -> 'html':
     title = 'Here are your results:'
     results = str(search4letters(phrase, letters))
     log_request(request, results)
-    return render_template('results.html', the_title=title, the_phrase=phrase, the_letters=letters, the_results=results)
+    return render_template('results.html',
+                           the_title=title,
+                           the_phrase=phrase,
+                           the_letters=letters,
+                           the_results=results)
 
 
 @app.route('/')
 @app.route('/entry')
 def entry_page() -> 'html':
     """Display this webapp's HTML form."""
-    return render_template('entry.html', the_title='Welcome to search4letters on the web!')
+    return render_template('entry.html',
+                           the_title='Welcome to search4letters on the web!')
 
 
 @app.route('/viewlog')
-def view_the_log() -> str:
-    """Display the contents of the log file as plain text."""
+def view_the_log() -> 'html':
+    """Display the contents of the log file as a HTML table."""
+    contents = []
     with open('vsearch.log') as log:
-        contents = log.read()
-    return escape(contents)
+        for line in log:
+            contents.append([])
+            for item in line.split('|'):
+                contents[-1].append(escape(item))
+    titles = ('Form Data', 'Remote_addr', 'User_agent', 'Results')
+    return render_template('viewlog.html',
+                           the_title='View Log:',
+                           the_row_titles=titles,
+                           the_data=contents)
 
 
 if __name__ == '__main__':
@@ -57,19 +68,19 @@ if __name__ == '__main__':
 """
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6edCgACgkQBXQppWFa
-stllLQ/8CGS86/edn7769gLyFUhWm8fWgFb4xpoFG+VmYA2w8FZh9HEHQBWwASmE
-8TE+ccMgWPrg8l1HJAnjTaJlJBsNCX0rLOfCIbbkkjGWwlSJWnoJ8fTzSl0cXABw
-jpTW3vlckLYk+D3FNBx4duWgKXuBNPopfSXkvyjH/jKMeWVo21+ZPLTnRNA2Nzkk
-OgYi5UgggVVhIypHjlqst69IbLx15zOELosQZaWNPMIUjYzI+rN+NPrsj0V+n3V9
-5PPwa1/bO451+VR3QRvfYGpCdUPimWbLS5uj57TqPj2mGsx5SxIzPI8lOcOR2vzP
-b4F29n18ddBUNGVbWTXR0GDeKO2iE7G4HI1+nr/O/+ppwKrojyxXIaaqNyAMV1VP
-cifL4QHyHf32xAdJWJk+CHiNTBCSs2AdAyp2RJZOL/arlv2uasOmXu/tEjXg2WVc
-Pt0ZaS54uVx4IGUfeWFlJdrws4lj6Y85/VYsnS/snnNNxyicDTg6H58va6yJycdf
-e0Pcwi4SyTerYaFAU8NV2LVnV9ljqJtKCu/1I302ZNfOe0qmAG9UijVVrj2lv20e
-5xjlmxQyRWWmPqaV0yFB6P37Ru2BSm4LLZ1+dwFEGw793Nz49KOYk6EiGO1Z/fRV
-Rc7BV5BRiKsQnqtOZ3gio9fG9YoZ0If0+gs59J3pxtCVX6fg1AM=
-=Y6Yp
+iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6fmaoACgkQBXQppWFa
+stm57Q/+JnmZHP2PYJfiDxQsTBdtPWUXz0LX3QjPXOMUPZiIDAnTx9Il2MaYzwef
+rv0By2EM5skhGGQ3Tpv3aRGZcSdNxN6dIb8VmBVMWDrAbmNFL6Bnn/N08kSxcUV5
+XkhBF7YgiBJjOyv2B0mREIxVnt9YmBVq/Br8COfBpHSv9FZ2EFIChr40kSa++2Zk
+uvNQt2W/Q3Cv5v4csWBTHmHqpdgzpgWr9m88sw8lCHheg0hPoc37Ep9tg2kiZsaN
+9vKkriVoiHpBGdUpFkIwzhrIa+7g3vJlTVrSFmIhnPGPtYOzKqXP9vVOOJHBWZ8l
+ObAVKWKsxQH+47x1JSAuqIdKTR14TqdQORZwSAh87lr+2dD0tkFv3N1FVSRlZEgf
+h0iLm/QGEb9V39hQFv7M1+xFnURI9XBbss6b/SaHFpu/aBWYvrXYq61qDPxBrHM/
+VTavqYzlCTZXjjmVB0nLl3+MsRDJBhH9WEPfr1nC6rP1y9kEe00y7dOb8CaoRiM0
+j1hMKLvhChpUnGcZ3LLVcSKckkohR1lOsL2k7KfCl4kyAqIh3+eCns8Ixy6JjnF7
+xjNWLdRMB1gtVJGJ8rnrbPfkcXmdr8a37EZBMdF3FBLuxW6nzbE+mo5mo9vvn5/G
+LKYsKfx4GmJ7cRV0GzhxibCqmnknQON6NYHl6fCoXTRTCmDEil4=
+=FBkE
 -----END PGP SIGNATURE-----
 
 """

@@ -1,0 +1,53 @@
+<!--
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+- -->
+
+
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+
+<table>
+  <tr>
+    {% for row_title in the_row_titles %}
+      <th>{{ row_title }}</th>
+    {% endfor %}
+  </tr>
+  {% for log_row in the_data %}
+    <tr>
+      {% for item in log_row %}
+        <td>{{ item }}</td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}
+
+
+
+<!--
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6fkg0ACgkQBXQppWFa
+stnrwQ/+OGh45NFu+8GLD73mvYiSE3WWpk88foJUB+T98KESgAlN/oiE3w72RWyr
+U7MsJg8LhnKbltqLhBuPS+OaKhZ5oWuAWeqhuDRLGotSCzHatbJXsZpZRDoH7fvN
+9XfI63XOUb/c5lZOGmiJaAsgJ8+vBxLzT+BUxTg2axbSxGd/nLbKu8cRVL6Dkcru
+PWCYiEfhge+nM/JaqZXXhadPk5RZboDrL46co8m3NzI25yebqDoBcZArgPrZ9hu5
+x1EVt2f3V/WhQcxaOpByn14Va0QY3M4h/mTX/2g4RzMVXj8JP9ioUhAYIFcndKsB
+7ba7QVQUXDhRpCtlEprEamOq0Q07k7Esq3AOqxwsPrfRy2TG+MySMEh3uPP93KD7
+QaSDobyJm+QzO6RTiVs8KQljxKZA4g2AZz5aS6cT4KJU7D7AsS2bK8TChJ3ZJpUm
+1cUdgB/9YsLzb3i61vmIMysMCq7SPFw2C+JV3Q/KmvyJr41WcSae9/PrYhSZ7X+N
+ExQWY0pU9HCF0woOVB078nz2Y94TWCzZLnB2rb/tCOR97L8KN8JfRaGIr3uiPShk
+ADPeVi5jDENZQWZcR/TnpREugJ4XzPCMr9raKnKbSS9IEGs0zAshmgtMJvnuQd0N
+s90xSmVjKG9dMDozfcuS0VD67ub289eoDnMs5XZFUKnmf6qab7s=
+=TasM
+-----END PGP SIGNATURE-----
+
+-->
