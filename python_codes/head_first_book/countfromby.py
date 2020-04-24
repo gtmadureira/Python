@@ -9,27 +9,37 @@ Hash: SHA256
 
 class CountFromBy:
 
+
+    def __init__(self, v: int=0, i: int=1) -> None:
+        self.val = v
+        self.incr = i
+
+
     def increase(self) -> None:
         self.val += self.incr
 
-""" I stopped on page n-322 """
+
+    def __repr__(self) -> str:
+        return str(self.val)
+
+
 
 """
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6iVRwACgkQBXQppWFa
-stmiSw/8C6HwN7W1ebU7WKfcSjTDO6nJD6zuE+Faq0O5RbH3aMkJUWIVqoK1ntOt
-tKJJdJCxeQwi+2iNcB/WCZcwcuwUvoghb+zmCsbpNk19K0DAw16ABsZr2Pu/x1wM
-aLQzzSbmGPkqDItyyz/V5q2YbfIC8aT3CLGawiq0eFO+ayfGvUuTjNnsnQ+RHRz2
-+m+CiwzvRFvIvkAf/6hh2PaZhDmcJebscOHWd9s1lOuw9z56kwHiCHBadkcHv6Zy
-Q9xVZ8YMlLS4C+Lctdj+4l/NHDKdTpRjk+TCStuvwozfbSCFmblUdbF+T3g8WuVd
-WxsiCNhPUIWIjttlCdOBnOwMSezX5R6cX65vdhT2AJW84F9vLjOkuhpA1VV/Zlcl
-3B2hlPTfgd4k7r/sGXwTP6ZQbw8Fdm2gUPe6qVogvMCgX5vXmyHLK8zb1cfb3OoN
-39fm8caPhHT8ryyJlmuYvuSLMZUn21B2X7dgJ4GHKuIgUlMo5lh6mB83fBIZtiZ3
-OtHB94b8vFE8vLxDPOjCzQCf6/e/ofRp6b2Esjif6u2//kC0NVQlhqBnoK9TYTh6
-j2GiDmTRqHwbscV/N3RM0XLEimRNpWDtPLzqx3LezesQMROO5e9VTm8RLTt2c6II
-0bbvdSk4ZymVCsjLauspjBsbjReoEHP3F5mDoDINuJG3qCxvsfE=
-=Q/LT
+iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6jczoACgkQBXQppWFa
+stkNug/+O4v9P0l02tS8zq9JSxTxQ5BoReXpo9TcCtL2yhYRut2KVf72Oxsmc8sS
+gmd6ZT4dMsyt+ffdmn3FEAUBkIkNkIwzdDpsMKg1Obv+7s2ZU33DNm8/RBqcSBr7
+Xve62Maqitc/T+MyfiQVs5LjRkXkMJ6s1W2pal9OFyrrgjjAhgu7WFilg2ZjBcC6
+QeESxFEOgMNkBEFIhXQNQZHXlkqFtOqrN5QKXbqYfaT3oZ6aP5ykJfsTmcHRMT7m
+Ge3hCtu/rZtppnv06q9hoGoPGw1EPrGDWqGzRVP/0GDjkXA1sAJoHp0TR/xHJm+d
+yFbvWtN+rOeLu/QWDjj/VE2na8eQ8JSOnm3+oVAK80jfZGXoCRaWyWKfiJfayQfd
+a236YsH2CZv7t4LOGL5Qnexqb/f7rZFN63Of0/XmHsSy84Fb5tYvcrtutEyttNsl
+ZpcSSlYSaiqLczk0NcqfAqRpWMu0DJ6w6jzG4W7QoIZ/35gMYC9NzFbI72V6fN4J
+xwQAT104A7VZ5L9ASoDZKwQG+xAwPC8aoAuAyjSE+IzAWUuK60aqOROHigfzoPzW
+8vU4vVwJUcbBJB9WIBgWqmxZITvramZ6Jtw3HV7NnQUmoCCElZTc5avRbJ68CGk+
+JcqxGv7EUGQS1G45cTXejqQp2RZ4gTmYkiVIOrlqEPraORrMdKA=
+=/uiL
 -----END PGP SIGNATURE-----
 
 """
