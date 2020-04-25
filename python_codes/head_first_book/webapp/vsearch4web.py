@@ -9,35 +9,31 @@ Hash: SHA256
 
 from flask import Flask, render_template, request, escape
 from vsearch import search4letters
-import mysql.connector
+from DBcm import UseDatabase
 
 
 app = Flask(__name__)
 
 
+app.config['dbconfig'] = { 'host': '127.0.0.1',
+                           'user': 'vsearch',
+                           'password': 'vsearchpasswd',
+                           'database': 'vsearchlogDB', }
+
+
 def log_request(req: 'flask_request', res: str) -> None:
     """Log details of the web request and the results."""
 
-    dbconfig = { 'host': '127.0.0.1',
-                 'user': 'vsearch',
-                 'password': 'vsearchpasswd',
-                 'database': 'vsearchlogDB', }
-
-    conn = mysql.connector.connect(**dbconfig)
-    cursor = conn.cursor()
-
-    vSQL = """insert into log
-              (phrase, letters, ip, browser_string, results)
-              values
-              (%s, %s, %s, %s, %s)"""
-    cursor.execute(vSQL, (req.form['phrase'],
-                          req.form['letters'],
-                          req.remote_addr,
-                          req.user_agent.browser,
-                          res, ))
-    conn.commit()
-    cursor.close()
-    conn.close()
+    with UseDatabase(app.config['dbconfig']) as cursor:
+        vSQL = """insert into log
+                  (phrase, letters, ip, browser_string, results)
+                  values
+                  (%s, %s, %s, %s, %s)"""
+        cursor.execute(vSQL, (req.form['phrase'],
+                              req.form['letters'],
+                              req.remote_addr,
+                              req.user_agent.browser,
+                              res, ))
 
 
 @app.route('/search4', methods=['POST'])
@@ -90,19 +86,19 @@ if __name__ == '__main__':
 """
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6hOb4ACgkQBXQppWFa
-stlaLg//a+Xpqb4/3mMfqVhEqd2QZqOeXKxrVRXLSm20I6Q1wKBC2uAUnC89xe12
-ijQ5dHEUD9qrUpIclNrLzUP2o/bYxiysCuT0EPVagvZNtJ+xlTupHgLoR0wj5/db
-70mNwdVacDpxzd+6JsGtNEZy3GCj9Lp2WUzs2CZ8l1hQHz4lBlFoWcVhr3X/tXES
-3Bfx3Ny8rhUkj91f4s4MsN2e71+abuvljhHasjFo9FIJkVNT+dFOMRxuRI9EafS3
-986P1IJmfFTE80+hWCZXLIDON+5HQB+Dt7BpRKPkPrRw0DaFnpKodJmQFurFwnIn
-TBSG4tolX42iUf7NpwKU/gAd+7kL+DWUjezw/X3E16RF3s2h7CIOcC19xtfzdlMG
-OsUJX3WoSJFXQl0FXIbcBsaFXwa3niZXdNXjfkCoze9svAfM4blx4FMi+ek5XWlU
-8eSXR28m9QdLZKkHSKIo1yUUFZWsbrau2Fp4ivS8BMINpX48muLzG7FtoF24qIKc
-Y1G7DVvf7SqjZPg35PLWIPHrUe+lgI0IMAYghcTahWs+nieZnky1KxFpdDwNi6eX
-T5kE+5E3lvG5XcLi+3OtjfHtdfsCTQbynVnueGycfzbvzeTIBFEFaFylSl5SuVZA
-5zT6cxDfNM2xomqterd1NMz96zoR1gJLZ7UzZ5Fx4swONfFy0Mg=
-=LaUX
+iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6jleAACgkQBXQppWFa
+stk2KA/+Lb0UKwxhzmmWTJ1NmYIfIfqRRNhY9FTicGtrbXDZHyEKVhD2ML08npuC
+5yNPfmHSxeoc8bS5kimminZFDXsIN4Vh9Obv52c4rX9du2ttzeXrHnqeh6sYLwMc
+ze9dMxx0SiZXoQBrx6ohwfnLLsXG9RYsi37rLCLLQKwaNlO6dlAaBK4n4Zc34dIi
+xCHP1cNnY8OdP51f/u28cwnWBCKn/bU8NPHPwPbqFAigFxLKmIzlo0TTzXAJovbq
+jUL63NdqkrwsAiBQx4mvLGNsBlIIxfrX3lXx69LB7rk4C1mCFFfVTGioEZyjBOVs
+u2i1qdGcaKCI+1bngp7kj39LT1qRCqKXGPxxq6TZ+eJSTpu3TcTuFMqJkBbP7dPm
+YQnrHn3OR8gVO6wYjo70aZFKEhoOdwMjBxiSYcZWTziq88JfynyQES/qzBashug8
+vjgAxwavtVZtVzO2xiUfC7cbqIje1pRnBZ9/9eQIsTO4M5wQajwI9yQiYCjGnEcU
+ns+VuLbuFOW3thf7oOjlHlcsb4QBnyRjhxwnx4VJfQ1l1VIJTUgU1BQ4fkQBjOkY
+A9A8GeY5JFPvGTA/nXj7EzNaR9V0a19cvJoFesov1wcvLQp5QWg4leJP+UDe4Ok2
+NksAgmTYikIw2ubNf+K76RXvByHpHJ64ao4qXfy/a57Q0OYRozU=
+=LjH+
 -----END PGP SIGNATURE-----
 
 """
