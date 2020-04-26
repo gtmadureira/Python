@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 app.config['dbconfig'] = { 'host': '127.0.0.1',
                            'user': 'vsearch',
-                           'password': 'vsearchpasswd',
+                           'password': 'Vse@rchpasswd86',
                            'database': 'vsearchlogDB', }
 
 
@@ -86,19 +86,19 @@ if __name__ == '__main__':
 """
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6jleAACgkQBXQppWFa
-stk2KA/+Lb0UKwxhzmmWTJ1NmYIfIfqRRNhY9FTicGtrbXDZHyEKVhD2ML08npuC
-5yNPfmHSxeoc8bS5kimminZFDXsIN4Vh9Obv52c4rX9du2ttzeXrHnqeh6sYLwMc
-ze9dMxx0SiZXoQBrx6ohwfnLLsXG9RYsi37rLCLLQKwaNlO6dlAaBK4n4Zc34dIi
-xCHP1cNnY8OdP51f/u28cwnWBCKn/bU8NPHPwPbqFAigFxLKmIzlo0TTzXAJovbq
-jUL63NdqkrwsAiBQx4mvLGNsBlIIxfrX3lXx69LB7rk4C1mCFFfVTGioEZyjBOVs
-u2i1qdGcaKCI+1bngp7kj39LT1qRCqKXGPxxq6TZ+eJSTpu3TcTuFMqJkBbP7dPm
-YQnrHn3OR8gVO6wYjo70aZFKEhoOdwMjBxiSYcZWTziq88JfynyQES/qzBashug8
-vjgAxwavtVZtVzO2xiUfC7cbqIje1pRnBZ9/9eQIsTO4M5wQajwI9yQiYCjGnEcU
-ns+VuLbuFOW3thf7oOjlHlcsb4QBnyRjhxwnx4VJfQ1l1VIJTUgU1BQ4fkQBjOkY
-A9A8GeY5JFPvGTA/nXj7EzNaR9V0a19cvJoFesov1wcvLQp5QWg4leJP+UDe4Ok2
-NksAgmTYikIw2ubNf+K76RXvByHpHJ64ao4qXfy/a57Q0OYRozU=
-=LjH+
+iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6k0PwACgkQBXQppWFa
+stkJiRAAjRUTYF3KensOiLsPJrM/B3Sn5Regjom+BdtvVMqkUxf8hmaQxeLnaOzD
+OO9rQ6CR4G0vytzoDdbshNSNc7yj8nixZM08UFSnjSkb55L3vIwg2PpmvuZiW+Po
+xwdj2Pra92BCpey4aYQUSZ1HFE4gduq2uLhsS9/atjvLzK7JgSTzWnm1X6SkOynx
+R5/RF8kfrihNvxg1EH9bPaVrVR5Ny3UxqmvilA7pi1Q0nDZFtS4IG6KHU+Vv4Qfp
+W5xSQ1SDy0Gl6Lfgi03xqBYiQKhGx/NSDBI7YPZSEdeHfcola8Jm0c90bIg9IgZ0
+CME75WsoAdVPMsgV6ve143HYvMIdQwLtK3R3Nc/KukXhVJGCLmK0dUTy9BlimU5W
+KQTD1KZYR2hFLCf2nmw/VcD9rtpC1mxdUjjThhhxRth9nKz30dtUW8vuQSO3Hhdf
+RLx+jWQwRgmHCj1cMmlBcSlPyqxDLt49P14E4a8ifbPmNbkaTO9EKw7DxXPvpTbL
+NsvWeICvokksT9jgZo2NDyQnsJwuKmAs0eMMACBbv3QPtiC+ElSgu4Wb8c/pj2Yb
+ZlBOZRPB+FtRO4NJ6m4kA2RoCTqzVBKxKV3BCuSizVQqTv81wcx7MDD+eI8g7pSs
+Fc4fwJ0ErbktXo+SzF7gQgWGaw0XrldA5si1mz5BR6MGHNKVohY=
+=Y4w1
 -----END PGP SIGNATURE-----
 
 """
