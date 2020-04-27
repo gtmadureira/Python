@@ -65,13 +65,12 @@ def entry_page() -> 'html':
 def view_the_log() -> 'html':
     """Display the contents of the log file as a HTML table."""
 
-    contents = []
-    with open('vsearch.log') as log:
-        for line in log:
-            contents.append([])
-            for item in line.split('|'):
-                contents[-1].append(escape(item))
-    titles = ('Form Data', 'Remote_addr', 'User_agent', 'Results')
+    with UseDatabase(app.config['dbconfig']) as cursor:
+        vSQL ="""select id, ts, phrase, letters, ip, browser_string, results
+                 from log"""
+        cursor.execute(vSQL)
+        contents = cursor.fetchall()
+    titles = ('ID', 'Datetime', 'Phrase', 'Letters', 'IP Address', 'Web browser', 'Results')
     return render_template('viewlog.html',
                            the_title='View Log:',
                            the_row_titles=titles,
@@ -86,19 +85,19 @@ if __name__ == '__main__':
 """
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6k0PwACgkQBXQppWFa
-stkJiRAAjRUTYF3KensOiLsPJrM/B3Sn5Regjom+BdtvVMqkUxf8hmaQxeLnaOzD
-OO9rQ6CR4G0vytzoDdbshNSNc7yj8nixZM08UFSnjSkb55L3vIwg2PpmvuZiW+Po
-xwdj2Pra92BCpey4aYQUSZ1HFE4gduq2uLhsS9/atjvLzK7JgSTzWnm1X6SkOynx
-R5/RF8kfrihNvxg1EH9bPaVrVR5Ny3UxqmvilA7pi1Q0nDZFtS4IG6KHU+Vv4Qfp
-W5xSQ1SDy0Gl6Lfgi03xqBYiQKhGx/NSDBI7YPZSEdeHfcola8Jm0c90bIg9IgZ0
-CME75WsoAdVPMsgV6ve143HYvMIdQwLtK3R3Nc/KukXhVJGCLmK0dUTy9BlimU5W
-KQTD1KZYR2hFLCf2nmw/VcD9rtpC1mxdUjjThhhxRth9nKz30dtUW8vuQSO3Hhdf
-RLx+jWQwRgmHCj1cMmlBcSlPyqxDLt49P14E4a8ifbPmNbkaTO9EKw7DxXPvpTbL
-NsvWeICvokksT9jgZo2NDyQnsJwuKmAs0eMMACBbv3QPtiC+ElSgu4Wb8c/pj2Yb
-ZlBOZRPB+FtRO4NJ6m4kA2RoCTqzVBKxKV3BCuSizVQqTv81wcx7MDD+eI8g7pSs
-Fc4fwJ0ErbktXo+SzF7gQgWGaw0XrldA5si1mz5BR6MGHNKVohY=
-=Y4w1
+iQIzBAEBCAAdFiEEE8iavjRZ2/dKhzGiBXQppWFastkFAl6mJ0wACgkQBXQppWFa
+stkMkg//bWVpLmhJmOrcYn/rmgz+EzIF0lgb+6YCbCUbJMDPPPD6eZwUdUFyHfvT
+hG71XD8iY+BcPt6hVp2R6eUAgQFOqOuY/z7NmNR2FFxxsVR0djsxNfI5r69+Yud0
+VAsIGg7hi4pHSqa+axEQ7rZZOOiUuP2zvIUb/0ShiIZ15fiwTSQ8Z75fch6r5mUz
+CS1SKhrhuPMkAKEZN58QfKg5M875q1P+ROwY6gGHCn9imyhyMQHAHxfUi3GbPqJ5
+p+FJhZ7zwSE/u2oBKHp/r/7YP05XKls0sZrQKvzduz22r2kvg6qIcxi/kNoQXu9F
+q+ODoMwuaLFenkWCrbsTMPRD+c0CB1Y3SOK6Jzpud00cnT58HhdWg96k1kH/gUGj
+XBl5eDlcMklDr58xgc0KTGjndlobq9LTXg3FOtd2K080Znj3uTQFXqBlAsWgmzBY
+3O9qkSdBevCngZwoCOAByCyPR+fhgelCQ6XlSqxxu3GHYnJVg1xxVrt51FnCFGKl
+A/ajv09BhPisOiOVL4Et2fotWuZp093z1lPogR0t8/ISCeQTlVc3U1z4EZ8mUhVC
+JvTp4rPVLdHq464JcwRJaa4kFlFrp3d7rO+WdcgNRsG8uSOiOZJZBFz7JM+zm4Ri
+NEuBmF3EBymgIA35DZ001ZIyO1PhdkUgMyvyXVZ9d0QaPb8+rT8=
+=N+YR
 -----END PGP SIGNATURE-----
 
 """
