@@ -24,6 +24,12 @@ def check_status() -> str:
     return 'You are NOT logged in.'
 
 
+def check_logged_in() -> bool:
+    if 'logged_in' in session:
+        return True
+    return False
+
+
 @app.route('/')
 def hello() -> str:
     return 'Hello from the simple webapp.'
@@ -31,6 +37,8 @@ def hello() -> str:
 
 @app.route('/page1')
 def page1() -> str:
+    if not check_logged_in():
+        return 'You are NOT logged in.'
     return 'This is page 1.'
 
 
