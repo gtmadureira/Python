@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from vsearch import search4letters
 from DBcm import UseDatabase
+from checker import check_logged_in
 
 app = Flask(__name__)
 
@@ -8,6 +9,51 @@ app.config['dbconfig'] = {'host': '127.0.0.1',
                           'user': 'vsearch',
                           'password': 'Vse@rchpasswd86',
                           'database': 'vsearchlogDB', }
+
+app.secret_key = 'SecretKeyHere'
+
+
+@app.route('/login')
+def do_login() -> str:
+    if 'logged_in' not in session:
+        session['logged_in'] = True
+        return 'You are now logged in.'
+    return 'You are currently logged in.'
+
+
+@app.route('/logout')
+def do_logout() -> str:
+    if 'logged_in' in session:
+        session.pop('logged_in')
+        return 'You are now logged out.'
+    return 'You are currently logged out.'
+
+
+@app.route('/')
+@app.route('/entry')
+@check_logged_in
+def entry_page() -> 'html':
+    """Display this webapp's HTML form."""
+
+    return render_template('entry.html',
+                           the_title='Welcome to search4letters on the web!')
+
+
+@app.route('/search4', methods=['POST'])
+@check_logged_in
+def do_search() -> 'html':
+    """Extract the posted data; perform the search; return results."""
+
+    phrase = request.form['phrase']
+    letters = request.form['letters']
+    title = 'Here are your results:'
+    results = str(search4letters(phrase, letters))
+    log_request(request, results)
+    return render_template('results.html',
+                           the_title=title,
+                           the_phrase=phrase,
+                           the_letters=letters,
+                           the_results=results)
 
 
 def log_request(req: 'flask_request', res: str) -> None:
@@ -25,32 +71,8 @@ def log_request(req: 'flask_request', res: str) -> None:
                               res, ))
 
 
-@app.route('/search4', methods=['POST'])
-def do_search() -> 'html':
-    """Extract the posted data; perform the search; return results."""
-
-    phrase = request.form['phrase']
-    letters = request.form['letters']
-    title = 'Here are your results:'
-    results = str(search4letters(phrase, letters))
-    log_request(request, results)
-    return render_template('results.html',
-                           the_title=title,
-                           the_phrase=phrase,
-                           the_letters=letters,
-                           the_results=results)
-
-
-@app.route('/')
-@app.route('/entry')
-def entry_page() -> 'html':
-    """Display this webapp's HTML form."""
-
-    return render_template('entry.html',
-                           the_title='Welcome to search4letters on the web!')
-
-
 @app.route('/viewlog')
+@check_logged_in
 def view_the_log() -> 'html':
     """Display the contents of the log file as a HTML table."""
 
