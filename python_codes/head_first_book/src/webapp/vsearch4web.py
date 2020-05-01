@@ -13,25 +13,16 @@ app.config['dbconfig'] = {'host': '127.0.0.1',
 app.secret_key = 'SecretKeyHere'
 
 
-@app.route('/login')
-def do_login() -> str:
-    if 'logged_in' not in session:
-        session['logged_in'] = True
-        return 'You are now logged in.'
-    return 'You are currently logged in.'
-
-
 @app.route('/logout')
-def do_logout() -> str:
+def do_logout() -> 'redirect':
     if 'logged_in' in session:
         session.pop('logged_in')
-        return 'You are now logged out.'
-    return 'You are currently logged out.'
+        return view_the_log()
+    return view_the_log()
 
 
 @app.route('/')
 @app.route('/entry')
-@check_logged_in
 def entry_page() -> 'html':
     """Display this webapp's HTML form."""
 
@@ -40,13 +31,13 @@ def entry_page() -> 'html':
 
 
 @app.route('/search4', methods=['POST'])
-@check_logged_in
 def do_search() -> 'html':
-    """Extract the posted data; perform the search; return results."""
+    """Extract the posted data; perform the search;
+    send posted and serach data to log_request(); return results."""
 
+    title = 'Here are your results:'
     phrase = request.form['phrase']
     letters = request.form['letters']
-    title = 'Here are your results:'
     results = str(search4letters(phrase, letters))
     log_request(request, results)
     return render_template('results.html',
@@ -60,6 +51,7 @@ def log_request(req: 'flask_request', res: str) -> None:
     """Log details of the web request and the results."""
 
     with UseDatabase(app.config['dbconfig']) as cursor:
+
         vSQL = """insert into log
                   (phrase, letters, ip, browser_string, results)
                   values
@@ -74,19 +66,51 @@ def log_request(req: 'flask_request', res: str) -> None:
 @app.route('/viewlog')
 @check_logged_in
 def view_the_log() -> 'html':
-    """Display the contents of the log file as a HTML table."""
+    """Display the contents from database(log table) as a HTML table."""
 
     with UseDatabase(app.config['dbconfig']) as cursor:
+
         vSQL = """select id, ts, phrase, letters, ip, browser_string, results
                  from log"""
         cursor.execute(vSQL)
+
         contents = cursor.fetchall()
+
     titles = ('ID', 'Datetime', 'Phrase', 'Letters',
               'IP Address', 'Web browser', 'Results')
+
     return render_template('viewlog.html',
                            the_title='View Log:',
                            the_row_titles=titles,
                            the_data=contents)
+
+
+@app.route('/login', methods=['POST'])
+def do_login() -> 'redirect':
+    """Logout procedure."""
+
+    with UseDatabase(app.config['dbconfig']) as cursor:
+
+        vSQL = """select user, password from users"""
+        cursor.execute(vSQL)
+
+        contents = cursor.fetchall()
+        found_user = []
+
+        usr = request.form['user']
+        passwd = request.form['password']
+
+        for user in contents:
+            for item in user:
+                found_user.append(item)
+
+        if usr in found_user:
+            if passwd in found_user:
+                session['logged_in'] = True
+                return view_the_log()
+        return render_template('login.html',
+                               the_title='Welcome to search4letters on the web!',
+                               the_error="Invalid 'User' and/or 'Password'.")
 
 
 if __name__ == '__main__':

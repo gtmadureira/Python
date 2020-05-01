@@ -2,7 +2,12 @@
 
 {% block body %}
 
-<h2>{{ the_title }}</h2>
+<h2>  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button onclick="location.href='/viewlog'" type="button">VIEW LOG</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  {{ the_title }}
+</h2>
 
 <form method="POST" action="/search4">
   <table>
