@@ -13,14 +13,6 @@ app.config['dbconfig'] = {'host': '127.0.0.1',
 app.secret_key = 'SecretKeyHere'
 
 
-@app.route('/logout')
-def do_logout() -> 'redirect':
-    if 'logged_in' in session:
-        session.pop('logged_in')
-        return view_the_log()
-    return view_the_log()
-
-
 @app.route('/')
 @app.route('/entry')
 def entry_page() -> 'html':
@@ -33,13 +25,14 @@ def entry_page() -> 'html':
 @app.route('/search4', methods=['POST'])
 def do_search() -> 'html':
     """Extract the posted data; perform the search;
-    send posted and serach data to log_request(); return results."""
+       send posted and serach data to log_request(); return results."""
 
     title = 'Here are your results:'
     phrase = request.form['phrase']
     letters = request.form['letters']
     results = str(search4letters(phrase, letters))
     log_request(request, results)
+
     return render_template('results.html',
                            the_title=title,
                            the_phrase=phrase,
@@ -71,7 +64,7 @@ def view_the_log() -> 'html':
     with UseDatabase(app.config['dbconfig']) as cursor:
 
         vSQL = """select id, ts, phrase, letters, ip, browser_string, results
-                 from log"""
+                  from log"""
         cursor.execute(vSQL)
 
         contents = cursor.fetchall()
@@ -87,30 +80,43 @@ def view_the_log() -> 'html':
 
 @app.route('/login', methods=['POST'])
 def do_login() -> 'redirect':
-    """Logout procedure."""
+    """Login procedure."""
 
     with UseDatabase(app.config['dbconfig']) as cursor:
-
-        vSQL = """select user, password from users"""
-        cursor.execute(vSQL)
-
-        contents = cursor.fetchall()
-        found_user = []
 
         usr = request.form['user']
         passwd = request.form['password']
 
-        for user in contents:
-            for item in user:
-                found_user.append(item)
+        vSQL = """select user, password from users where
+                  user=%s and password =%s"""
+        cursor.execute(vSQL, (usr, passwd))
 
-        if usr in found_user:
-            if passwd in found_user:
-                session['logged_in'] = True
-                return view_the_log()
+        list_contents = cursor.fetchall()
+
+        posted_user = [usr, passwd]
+        user_found = []
+
+        for tuple_user in list_contents:
+            for item in tuple_user:
+                user_found.append(item)
+
+        if user_found == posted_user:
+            session['logged_in'] = True
+            return view_the_log()
         return render_template('login.html',
-                               the_title='Welcome to search4letters on the web!',
+                               the_title="""Welcome to search4letters
+                                            on the web!""",
                                the_error="Invalid 'User' and/or 'Password'.")
+
+
+@app.route('/logout')
+def do_logout() -> 'redirect':
+    """Logout procedure."""
+
+    if 'logged_in' in session:
+        session.pop('logged_in')
+        return view_the_log()
+    return view_the_log()
 
 
 if __name__ == '__main__':
