@@ -3,6 +3,7 @@ from vsearch import search4letters
 from DBcm import UseDatabase
 from checker import check_logged_in
 
+
 app = Flask(__name__)
 
 app.config['dbconfig'] = {'host': '127.0.0.1',
@@ -73,8 +74,9 @@ def view_the_log() -> 'html':
               'IP Address', 'Web browser', 'Results')
 
     return render_template('viewlog.html',
-                           the_title='View Log:',
+                           the_title='View Log',
                            the_row_titles=titles,
+                           the_user=session.get("USERNAME"),
                            the_data=contents)
 
 
@@ -102,6 +104,7 @@ def do_login() -> 'redirect':
 
         if user_found == posted_user:
             session['logged_in'] = True
+            session['USERNAME'] = user_found[0]
             return view_the_log()
         return render_template('login.html',
                                the_title="""Welcome to search4letters
