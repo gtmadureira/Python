@@ -33,7 +33,19 @@ def do_search() -> 'html':
     phrase = request.form['phrase']
     letters = request.form['letters']
     results = str(search4letters(phrase, letters))
-    log_request(request, results)
+
+    try:
+
+        log_request(request, results)
+
+    except Exception as err:
+
+        print('***** Logging failed with this error:', str(err))
+        return render_template('entry.html',
+                               the_title="""Welcome to search4letters
+                                            on the web!""",
+                               the_error="""** System temporarily unavailable.
+                                            Try later !""")
 
     return render_template('results.html',
                            the_title=title,
@@ -43,7 +55,8 @@ def do_search() -> 'html':
 
 
 def log_request(req: 'flask_request', res: str) -> None:
-    """Log details of the web request and the results."""
+    """Record of the log details from web request and the results, 
+       on the database."""
 
     with UseDatabase(app.config['dbconfig']) as cursor:
 
@@ -63,13 +76,23 @@ def log_request(req: 'flask_request', res: str) -> None:
 def view_the_log() -> 'html':
     """Display the contents from database(log table) as a HTML table."""
 
-    with UseDatabase(app.config['dbconfig']) as cursor:
+    try:
 
-        vSQL = """select id, ts, phrase, letters, ip, browser_string, results
-                  from log"""
-        cursor.execute(vSQL)
+        with UseDatabase(app.config['dbconfig']) as cursor:
+            vSQL = """select id, ts, phrase, letters, ip, browser_string, results
+                      from log"""
+            cursor.execute(vSQL)
+            contents = cursor.fetchall()
 
-        contents = cursor.fetchall()
+    except Exception as err:
+
+        print('***** Login failed with this error:', str(err))
+        user = capwords(session.get("USERNAME"))
+        return render_template('viewlog.html',
+                               the_title='View Log',
+                               the_user=user,
+                               the_error="""System temporarily unavailable.
+                                            Try later !""")
 
     titles = ('ID', 'Datetime', 'Phrase', 'Letters',
               'IP Address', 'Web browser', 'Results')
@@ -86,32 +109,40 @@ def view_the_log() -> 'html':
 def do_login() -> 'redirect':
     """Login procedure."""
 
-    with UseDatabase(app.config['dbconfig']) as cursor:
+    usr = request.form['user']
+    passwd = request.form['password']
 
-        usr = request.form['user']
-        passwd = request.form['password']
+    try:
 
-        vSQL = """select user, password from users where
-                  user=%s and password =%s"""
-        cursor.execute(vSQL, (usr, passwd))
+        with UseDatabase(app.config['dbconfig']) as cursor:
+            vSQL = """select user, password from users where
+                      user=%s and password =%s"""
+            cursor.execute(vSQL, (usr, passwd))
+            list_contents = cursor.fetchall()
 
-        list_contents = cursor.fetchall()
+    except Exception as err:
 
-        posted_user = [usr, passwd]
-        user_found = []
-
-        for tuple_user in list_contents:
-            for item in tuple_user:
-                user_found.append(item)
-
-        if user_found == posted_user:
-            session['logged_in'] = True
-            session['USERNAME'] = user_found[0]
-            return view_the_log()
+        print('***** Login failed with this error:', str(err))
         return render_template('login.html',
                                the_title="""Welcome to search4letters
                                             on the web!""",
-                               the_error="Invalid 'User' and/or 'Password'.")
+                               the_error="""** System temporarily unavailable.
+                                            Try later !""")
+
+    posted_user = [usr, passwd]
+    user_found = []
+
+    for tuple_user in list_contents:
+        for item in tuple_user:
+            user_found.append(item)
+
+    if user_found == posted_user:
+        session['logged_in'] = True
+        session['USERNAME'] = user_found[0]
+        return view_the_log()
+    return render_template('login.html',
+                           the_title='Welcome to search4letters on the web!',
+                           the_error="Invalid 'User' and/or 'Password'.")
 
 
 @app.route('/logout')
