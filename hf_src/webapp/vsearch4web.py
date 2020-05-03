@@ -73,12 +73,12 @@ def view_the_log() -> 'html':
 
     titles = ('ID', 'Datetime', 'Phrase', 'Letters',
               'IP Address', 'Web browser', 'Results')
-    user = session.get("USERNAME")
+    user = capwords(session.get("USERNAME"))
 
     return render_template('viewlog.html',
                            the_title='View Log',
                            the_row_titles=titles,
-                           the_user=capwords(user),
+                           the_user=user,
                            the_data=contents)
 
 
