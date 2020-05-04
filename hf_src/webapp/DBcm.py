@@ -27,6 +27,10 @@ Python 3 only, due to type hints and new syntax.
 import mysql.connector
 
 
+class ConnectionError(Exception):
+    pass
+
+
 class UseDatabase:
 
     def __init__(self, config: dict) -> None:
@@ -41,18 +45,27 @@ class UseDatabase:
             database - the name of the database to use.
 
         For more options, refer to the mysql-connector-python documentation."""
+
         self.configuration = config
 
     def __enter__(self) -> 'cursor':
         """Connect to database and create a DB cursor.
 
         Return the database cursor to the context manager."""
-        self.conn = mysql.connector.connect(**self.configuration)
-        self.cursor = self.conn.cursor()
-        return self.cursor
+
+        try:
+
+            self.conn = mysql.connector.connect(**self.configuration)
+            self.cursor = self.conn.cursor()
+            return self.cursor
+
+        except mysql.connector.errors.InterfaceError as err:
+
+            raise ConnectionError(err)
 
     def __exit__(self, exc_type, exc_value, exc_trace) -> None:
         """Destroy the cursor as well as the connection (after committing)."""
+
         self.conn.commit()
         self.cursor.close()
         self.conn.close()
