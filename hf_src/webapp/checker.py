@@ -8,6 +8,6 @@ def check_logged_in(func):
         if 'logged_in' in session:
             return func(*args, **kwargs)
         return render_template('login.html',
-                               the_title='Welcome to search4letters on the web!')
+                               the_title='Welcome to view log')
 
     return wrapper
