@@ -31,6 +31,14 @@ class ConnectionError(Exception):
     pass
 
 
+class CredentialsError(Exception):
+    pass
+
+
+class SQLError(Exception):
+    pass
+
+
 class UseDatabase:
 
     def __init__(self, config: dict) -> None:
@@ -63,9 +71,17 @@ class UseDatabase:
 
             raise ConnectionError(err)
 
-    def __exit__(self, exc_type, exc_value, exc_trace) -> None:
+        except mysql.connector.errors.ProgrammingError as err:
+
+            raise CredentialsError(err)
+
+    def __exit__(self, exc_type, exc_value, exc_traceback) -> None:
         """Destroy the cursor as well as the connection (after committing)."""
 
         self.conn.commit()
         self.cursor.close()
         self.conn.close()
+        if exc_type is mysql.connector.errors.ProgrammingError:
+            raise SQLError(exc_value)
+        elif exc_type:
+            raise exc_type(exc_value)

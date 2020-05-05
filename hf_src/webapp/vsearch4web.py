@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session
 from vsearch import search4letters
-from DBcm import UseDatabase, ConnectionError
+from DBcm import UseDatabase, ConnectionError, CredentialsError, SQLError
 from checker import check_logged_in
 from string import capwords
 
@@ -16,10 +16,10 @@ app.secret_key = 'SecretKeyHere'
 
 # The variables below are for providing argument values
 # for the error () function.
-t1 = 'Welcome to search4letters on the web!'
-t2 = 'Welcome to view log'
-e1 = '** System temporarily unavailable. Try later !'
-e2 = "Invalid 'User' and/or 'Password'."
+title_1 = 'Welcome to search4letters on the web!'
+title_2 = 'Welcome to view log'
+error_1 = '** System temporarily unavailable. Try later!'
+error_2 = "Invalid 'User' and/or 'Password'."
 
 
 @app.route('/')
@@ -42,18 +42,23 @@ def do_search() -> 'html':
     results = str(search4letters(phrase, letters))
 
     try:
-
         log_request(request, results)
 
     except ConnectionError as err:
-
         print('Is your database switched on? Error:', str(err))
-        return error('', 'entry', t1, e1)
+        return error('', 'entry', title_1, error_1)
+
+    except CredentialsError as err:
+        print('User-id/Password issues. Error:', str(err))
+        return error('', 'entry', title_1, error_1)
+
+    except SQLError as err:
+        print('Is your query correct? Error:', str(err))
+        return error('', 'entry', title_1, error_1)
 
     except Exception as err:
-
-        print('***** Logging failed with this error:', str(err))
-        return error('', 'entry', t1, e1)
+        print('Something went wrong:', str(err))
+        return error('', 'entry', title_1, error_1)
 
     return render_template('results.html',
                            the_title=title,
@@ -63,8 +68,8 @@ def do_search() -> 'html':
 
 
 def log_request(req: 'flask_request', res: str) -> None:
-    """Record of the log details from web request and the results,
-       on the database."""
+    """Record of the log details from web request and the
+       results on database."""
 
     with UseDatabase(app.config['dbconfig']) as cursor:
         vSQL = """insert into log
@@ -86,7 +91,6 @@ def view_the_log() -> 'html':
     user = capwords(session.get("USERNAME"))
 
     try:
-
         with UseDatabase(app.config['dbconfig']) as cursor:
             vSQL = """select id, ts, phrase, letters, ip, browser_string, results
                       from log"""
@@ -94,20 +98,26 @@ def view_the_log() -> 'html':
             contents = cursor.fetchall()
 
     except ConnectionError as err:
-
         print('Is your database switched on? Error:', str(err))
-        return error(user, 'viewlog', t2, e1)
+        return error(user, 'viewlog', title_2, error_1)
+
+    except CredentialsError as err:
+        print('User-id/Password issues. Error:', str(err))
+        return error(user, 'viewlog', title_2, error_1)
+
+    except SQLError as err:
+        print('Is your query correct? Error:', str(err))
+        return error(user, 'viewlog', title_2, error_1)
 
     except Exception as err:
-
-        print('***** Login failed with this error:', str(err))
-        return error(user, 'viewlog', t2, e1)
+        print('Something went wrong:', str(err))
+        return error(user, 'viewlog', title_2, error_1)
 
     titles = ('ID', 'Datetime', 'Phrase', 'Letters',
               'IP Address', 'Web browser', 'Results')
 
     return render_template('viewlog.html',
-                           the_title=t2,
+                           the_title='Welcome to view log',
                            the_row_titles=titles,
                            the_user=user,
                            the_data=contents)
@@ -130,7 +140,6 @@ def do_login() -> 'redirect':
     passwd = request.form['password']
 
     try:
-
         with UseDatabase(app.config['dbconfig']) as cursor:
             vSQL = """select user, password from users where
                       user=%s and password =%s"""
@@ -138,14 +147,20 @@ def do_login() -> 'redirect':
             list_contents = cursor.fetchall()
 
     except ConnectionError as err:
-
         print('Is your database switched on? Error:', str(err))
-        return error('', 'login', t2, e1)
+        return error('', 'login', title_2, error_1)
+
+    except CredentialsError as err:
+        print('User-id/Password issues. Error:', str(err))
+        return error('', 'login', title_2, error_1)
+
+    except SQLError as err:
+        print('Is your query correct? Error:', str(err))
+        return error('', 'login', title_2, error_1)
 
     except Exception as err:
-
-        print('***** Login failed with this error:', str(err))
-        return error('', 'login', t2, e1)
+        print('Something went wrong:', str(err))
+        return error('', 'login', title_2, error_1)
 
     posted_user = [usr, passwd]
     user_found = []
@@ -159,8 +174,8 @@ def do_login() -> 'redirect':
         session['USERNAME'] = user_found[0]
         return view_the_log()
     return render_template('login.html',
-                           the_title=t2,
-                           the_error=e2)
+                           the_title='Welcome to view log',
+                           the_error="Invalid 'User' and/or 'Password'.")
 
 
 @app.route('/logout')
