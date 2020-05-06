@@ -62,17 +62,14 @@ class UseDatabase:
         Return the database cursor to the context manager."""
 
         try:
-
             self.conn = mysql.connector.connect(**self.configuration)
             self.cursor = self.conn.cursor()
             return self.cursor
 
         except mysql.connector.errors.InterfaceError as err:
-
             raise ConnectionError(err)
 
         except mysql.connector.errors.ProgrammingError as err:
-
             raise CredentialsError(err)
 
     def __exit__(self, exc_type, exc_value, exc_traceback) -> None:
