@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, session
 from flask import copy_current_request_context
-from vsearch import search4letters
+from threading import Thread
+from string import capwords
 from DBcm import UseDatabase
 from checker import check_logged_in
-from string import capwords
-from threading import Thread
+from vsearch import search4letters
+
 
 ###############################################################################
 
