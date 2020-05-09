@@ -19,7 +19,7 @@ app.config['dbconfig'] = {'host': '127.0.0.1',
 app.secret_key = 'SecretKeyHere'
 
 # The variables below are for providing argument values
-# for the error () function.
+# for the error() function.
 title_1 = 'Welcome to view log'
 error_1 = '** System temporarily unavailable. Try later!'
 error_2 = 'System temporarily unavailable. Error: '
@@ -152,6 +152,8 @@ def do_login() -> 'redirect':
             return view_the_log()
         return render_template('login.html',
                                the_title='Welcome to view log',
+                               the_user=usr,
+                               the_password=passwd,
                                the_error="Invalid 'User' and/or 'Password'.")
 
     except Exception as err:
