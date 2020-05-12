@@ -19,7 +19,7 @@ print(dictvar, end='\n')
 # Sets, can make intersection, union and difference.
 print('\n')
 setvar = {'a', 'b', 3, 3, 4.0, 4.0, False}
-print(setvar, end='\n')
+print(setvar, end='\n')  # Only return unique elements.
 
 # This is a tuple:
 # static, never changes.

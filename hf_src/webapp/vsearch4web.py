@@ -95,8 +95,8 @@ def view_the_log() -> 'html':
 
     try:
         with UseDatabase(app.config['dbconfig']) as cursor:
-            vSQL = """select id, ts, phrase, letters, ip, browser_string, results
-                      from log"""
+            vSQL = """select id, ts, phrase, letters, ip, browser_string,
+                      results from log"""
             cursor.execute(vSQL)
             contents = cursor.fetchall()
             titles = ('ID', 'Datetime', 'Phrase', 'Letters',
