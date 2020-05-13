@@ -1,5 +1,6 @@
 from typing import Generator
 import requests
+import pprint
 
 
 def gen_from_urls(urls: tuple) -> Generator:
@@ -26,5 +27,12 @@ if __name__ == '__main__':
             'http://www.usatoday.com', 'http://www.cnn.com',
             'http://www.dell.com')
 
+    print()
     for resp_len, status, url in gen_from_urls(urls):
         print(resp_len, '->', status, '->', url)
+    print()
+
+    print()
+    urls_res = {url: size for size, _, url in gen_from_urls(urls)}
+    pprint.pprint(urls_res)
+    print()
