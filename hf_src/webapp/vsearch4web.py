@@ -1,11 +1,11 @@
 # pyright: reportMissingImports=false
-# pyright: reportUndefinedVariable=false
 
 
 from flask import Flask, render_template, request, session
 from flask import copy_current_request_context
 from threading import Thread
 from string import capwords
+from typing import Any
 from DBcm import UseDatabase
 from checker import check_logged_in
 from vsearch import search4letters
@@ -33,7 +33,7 @@ error_2 = 'System temporarily unavailable. Error: '
 
 @app.route('/')
 @app.route('/entry')
-def entry_page() -> 'html':
+def entry_page() -> Any:
     """Display this webapp's HTML form."""
 
     return render_template('entry.html',
@@ -44,12 +44,12 @@ def entry_page() -> 'html':
 
 
 @app.route('/search4', methods=['POST'])
-def do_search() -> 'html':
+def do_search() -> Any:
     """Extract the posted data; perform the search;
        send posted and searched data to log_request(); return results."""
 
     @copy_current_request_context
-    def log_request(req: 'flask_request', res: str) -> None:
+    def log_request(req: Any, res: str) -> None:
         """Record of the log details from web request and the
            results on database."""
 
@@ -92,7 +92,7 @@ def do_search() -> 'html':
 
 @app.route('/viewlog')
 @check_logged_in
-def view_the_log() -> 'html':
+def view_the_log() -> Any:
     """Display the contents from database(log table) as a HTML table."""
 
     user = capwords(session.get("USERNAME"))
@@ -120,7 +120,7 @@ def view_the_log() -> 'html':
 
 
 def error(user: str, url: str, title: str,
-          error: str, error_exc: str) -> 'html':
+          error: str, error_exc: str) -> Any:
     """Input/Show erros in the current page."""
 
     return render_template(url+'.html',
@@ -134,7 +134,7 @@ def error(user: str, url: str, title: str,
 
 
 @app.route('/login', methods=['POST'])
-def do_login() -> 'redirect':
+def do_login() -> Any:
     """Login procedure."""
 
     try:
@@ -169,7 +169,7 @@ def do_login() -> 'redirect':
 
 
 @app.route('/logout')
-def do_logout() -> 'redirect':
+def do_logout() -> Any:
     """Logout procedure."""
 
     if 'logged_in' in session:
