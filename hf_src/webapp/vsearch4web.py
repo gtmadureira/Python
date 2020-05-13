@@ -1,3 +1,7 @@
+# pyright: reportMissingImports=false
+# pyright: reportUndefinedVariable=false
+
+
 from flask import Flask, render_template, request, session
 from flask import copy_current_request_context
 from threading import Thread

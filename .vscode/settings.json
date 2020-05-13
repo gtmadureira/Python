@@ -1,20 +1,23 @@
 {
-    "python.pythonPath": "/home/gustavo/Projects/Python/venv/bin/python",
+
+    "python.pythonPath": "/usr/bin/python3",
+
     "code-runner.executorMap": {
-        "python": "/home/gustavo/Projects/Python/venv/bin/python -u"
+        "python": "/usr/bin/python3 -u"
     },
     "code-runner.ignoreSelection": true,
     "code-runner.runInTerminal": true,
-    "code-runner.fileDirectoryAsCwd": true,
-    
+    "code-runner.fileDirectoryAsCwd": true,    
 
-    "python.linting.flake8Enabled": false,
+    "python.linting.flake8Enabled": true,
     "python.linting.pylintEnabled": true,
-    "python.linting.mypyEnabled": false,
+    "python.linting.mypyEnabled": true,
     "python.linting.enabled": true,
+    
     "python.testing.unittestEnabled": true,
 
     "[python]": {
         "editor.formatOnSave": true    
-}
+    }
+
 }
