@@ -1,6 +1,5 @@
 # pyright: reportMissingImports=false
 
-
 from flask import Flask, render_template, request, session
 from flask import copy_current_request_context
 from threading import Thread
@@ -9,7 +8,6 @@ from typing import Any
 from DBcm import UseDatabase
 from checker import check_logged_in
 from vsearch import search4letters
-
 
 ###############################################################################
 
@@ -26,7 +24,7 @@ app.secret_key = 'SecretKeyHere'
 # for the error() function.
 title_1 = 'Welcome to view log'
 error_1 = '** System temporarily unavailable. Try later!'
-error_2 = 'System temporarily unavailable. Error: '
+error_2 = '*** Something went wrong --> '
 
 ###############################################################################
 
@@ -66,7 +64,10 @@ def do_search() -> Any:
                                       res))
 
         except Exception as err:
-            print('Something went wrong:', str(err))
+            print()
+            print('\033[1;31m', ' *** Something went wrong -->',
+                  str(err), '\033[m')
+            print()
 
     title = 'Here are your results:'
     phrase = request.form['phrase']
@@ -78,7 +79,10 @@ def do_search() -> Any:
         tr.start()
 
     except Exception as err:
-        print('Something went wrong:', str(err))
+        print()
+        print('\033[1;31m', ' *** Something went wrong -->',
+              str(err), '\033[m')
+        print()
 
     return render_template('results.html',
                            the_title=title,
@@ -112,7 +116,10 @@ def view_the_log() -> Any:
                                    the_data=contents)
 
     except Exception as err:
-        print('Something went wrong:', str(err))
+        print()
+        print('\033[1;31m', ' *** Something went wrong -->',
+              str(err), '\033[m')
+        print()
         return error(user, 'viewlog', title_1, error_2, str(err))
 
 
@@ -161,7 +168,10 @@ def do_login() -> Any:
                                the_error="Invalid 'User' and/or 'Password'.")
 
     except Exception as err:
-        print('Something went wrong:', str(err))
+        print()
+        print('\033[1;31m', ' *** Something went wrong -->',
+              str(err), '\033[m')
+        print()
         return error('', 'login', title_1, error_1, '')
 
 

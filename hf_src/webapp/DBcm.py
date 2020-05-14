@@ -25,6 +25,7 @@ Python 3 only, due to type hints and new syntax.
 ##############################################################################
 
 import mysql.connector
+from typing import Any
 
 
 class ConnectionError(Exception):
@@ -56,7 +57,7 @@ class UseDatabase:
 
         self.configuration = config
 
-    def __enter__(self) -> 'cursor':
+    def __enter__(self) -> Any:
         """Connect to database and create a DB cursor.
 
         Return the database cursor to the context manager."""
