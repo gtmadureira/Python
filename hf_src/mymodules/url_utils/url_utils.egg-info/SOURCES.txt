@@ -1,0 +1,7 @@
+README.txt
+setup.py
+url_utils.py
+url_utils.egg-info/PKG-INFO
+url_utils.egg-info/SOURCES.txt
+url_utils.egg-info/dependency_links.txt
+url_utils.egg-info/top_level.txt

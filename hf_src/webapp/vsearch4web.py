@@ -5,7 +5,7 @@ from flask import copy_current_request_context
 from threading import Thread
 from string import capwords
 from typing import Any
-from DBcm import UseDatabase
+from dbcm import UseDatabase
 from checker import check_logged_in
 from vsearch import search4letters
 

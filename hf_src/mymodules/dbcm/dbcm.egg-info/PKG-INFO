@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: dbcm
+Version: 1.0
+Summary: UseDatabase context manager for working with MySQL/MariaDB.
+Home-page: https://gtmadureira.github.io/
+Author: Gustavo Madureira
+Author-email: gtmadureira@gmail.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN

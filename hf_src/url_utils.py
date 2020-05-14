@@ -1,6 +1,6 @@
 from typing import Generator
+from pprint import pprint
 import requests
-import pprint
 
 
 def gen_from_urls(urls: tuple) -> Generator:
@@ -34,5 +34,5 @@ if __name__ == '__main__':
 
     print()
     urls_res = {url: size for size, _, url in gen_from_urls(urls)}
-    pprint.pprint(urls_res)
+    pprint(urls_res)
     print()

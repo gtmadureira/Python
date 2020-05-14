@@ -1,7 +1,5 @@
-# pyright: reportMissingImports=false
-
 from url_utils import gen_from_urls
-import pprint
+from pprint import pprint
 
 urls = ('http://www.globo.com', 'http://www.uol.com.br',
         'http://www.r7.com', 'http://www.nasa.gov',
@@ -16,5 +14,5 @@ print()
 
 print()
 urls_res = {url: size for size, _, url in gen_from_urls(urls)}
-pprint.pprint(urls_res)
+pprint(urls_res)
 print()
