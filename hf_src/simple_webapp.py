@@ -1,3 +1,5 @@
+# pyright: reportMissingImports=false
+
 from flask import Flask, session
 from checker import check_logged_in
 

@@ -1,5 +1,5 @@
 from datetime import datetime
-import pprint
+from pprint import pprint
 
 
 def convert2ampm(time24: str) -> str:
@@ -15,7 +15,7 @@ with open('buzzers.csv') as data:
 
 
 print()
-pprint.pprint(flights)
+pprint(flights)
 """
 {'09:35': 'FREEPORT',
  '09:55': 'WEST END',
@@ -32,7 +32,7 @@ print()
 
 fts = {convert2ampm(k): v.title() for k, v in flights.items()}
 
-pprint.pprint(fts)
+pprint(fts)
 """
 {'05:00PM': 'Freeport',
  '05:55PM': 'Rock Sound',
@@ -50,7 +50,7 @@ print()
 when = {dest: [k for k, v in fts.items() if v == dest]
         for dest in set(fts.values())}
 
-pprint.pprint(when)
+pprint(when)
 """
 {'Freeport': ['09:35AM', '05:00PM'],
  'Rock Sound': ['11:45AM', '05:55PM'],
