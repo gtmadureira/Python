@@ -65,8 +65,8 @@ def do_search() -> Any:
 
         except Exception as err:
             print()
-            print('\033[1;31m', ' *** Something went wrong -->',
-                  str(err), '\033[m')
+            print('{}   *** Something went wrong --> {}{}'.format(
+                  '\033[1;31m', str(err), '\033[m'))
             print()
 
     title = 'Here are your results:'
@@ -80,8 +80,8 @@ def do_search() -> Any:
 
     except Exception as err:
         print()
-        print('\033[1;31m', ' *** Something went wrong -->',
-              str(err), '\033[m')
+        print('{}   *** Something went wrong --> {}{}'.format(
+              '\033[1;31m', str(err), '\033[m'))
         print()
 
     return render_template('results.html',
@@ -117,8 +117,8 @@ def view_the_log() -> Any:
 
     except Exception as err:
         print()
-        print('\033[1;31m', ' *** Something went wrong -->',
-              str(err), '\033[m')
+        print('{}   *** Something went wrong --> {}{}'.format(
+              '\033[1;31m', str(err), '\033[m'))
         print()
         return error(user, 'viewlog', title_1, error_2, str(err))
 
@@ -169,8 +169,8 @@ def do_login() -> Any:
 
     except Exception as err:
         print()
-        print('\033[1;31m', ' *** Something went wrong -->',
-              str(err), '\033[m')
+        print('{}   *** Something went wrong --> {}{}'.format(
+              '\033[1;31m', str(err), '\033[m'))
         print()
         return error('', 'login', title_1, error_1, '')
 
