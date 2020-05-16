@@ -3,19 +3,19 @@ The UseDatabase context manager for working with MySQL/MariaDB.
 
 Simple example usage:
 
-        from dbcm import UseDatabase
+    from DBcm import UseDatabase
 
-        dbconfig = { 'host': '127.0.0.1',
-                     'user': 'myUserid',
-                     'password': 'myPassword',
-                     'database': 'myDB' }
+    dbconfig = { 'host': '127.0.0.1',
+                 'user': 'myUserid',
+                 'password': 'myPassword',
+                 'database': 'myDB' }
 
-        with UseDatabase(dbconfig) as cursor:
-            vSQL = "select * from log"
-            cursor.execute(vSQL)
-            data = cursor.fetchall()
-            for row in data:
-                print(row)
+    with UseDatabase(dbconfig) as cursor:
+        vSQL = "select * from log"
+        cursor.execute(vSQL)
+        data = cursor.fetchall()
+        for row in data:
+            print(row)
 
 Python 3 only, due to type hints and new syntax.
 """
