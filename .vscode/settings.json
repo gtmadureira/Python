@@ -18,6 +18,13 @@
 
     "[python]": {
         "editor.formatOnSave": true    
-    }
+    },
+    "cSpell.words": [
+        "dbcm",
+        "dbconfig",
+        "rchpasswd",
+        "vsearch",
+        "vsearchlog"
+    ]
 
 }
