@@ -126,7 +126,7 @@ def view_the_log() -> Any:
 
 def error(user: str, url: str, title: str,
           error: str, error_exc: str) -> Any:
-    """Input/Show erros in the current page."""
+    """Input/Show errors in the current page."""
 
     return render_template(url+'.html',
                            the_title=title,
