@@ -7,6 +7,8 @@
     },
     "code-runner.ignoreSelection": true,
     "code-runner.runInTerminal": true,
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.saveFileBeforeRun": true,
     "code-runner.fileDirectoryAsCwd": true,    
 
     "python.linting.flake8Enabled": true,
@@ -18,13 +20,6 @@
 
     "[python]": {
         "editor.formatOnSave": true    
-    },
-    "cSpell.words": [
-        "dbcm",
-        "dbconfig",
-        "rchpasswd",
-        "vsearch",
-        "vsearchlog"
-    ]
+    }    
 
 }

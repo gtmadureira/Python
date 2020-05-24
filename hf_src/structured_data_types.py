@@ -16,13 +16,13 @@ print(dictvar, end='\n')
 
 
 # This is a set:
-# Sets, can make intersection, union and difference.
+# Sets, can make intersections, unions and differences.
 print('\n')
 setvar = {'a', 'b', 3, 3, 4.0, 4.0, False}
 print(setvar, end='\n')  # Only return unique elements.
 
 # This is a tuple:
-# static, never changes.
+# Static, immutable, never changes.
 print('\n')
 tuplevar = ('a', 'b', 3, 4.0, False)
 print(tuplevar, end='\n')
