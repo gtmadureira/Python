@@ -1,4 +1,5 @@
-{
+{   
+    "editor.wordWrap": "on",
 
     "python.pythonPath": "/home/gustavo/Projects/Python/venv/bin/python",
 
