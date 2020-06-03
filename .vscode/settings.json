@@ -21,6 +21,8 @@
 
     "[python]": {
         "editor.formatOnSave": true    
-    }    
+    },
+    "cSpell.enabled": false,
+    "cSpell.language": "en-US,pt-BR,pt,en,en-GB",
 
 }
