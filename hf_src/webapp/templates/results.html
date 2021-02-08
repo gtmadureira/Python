@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button onclick="location.href='/entry'" type="button">HOME</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  {{ the_title }}
+</h2>
+
+<p>You submitted the following data:</p>
+<table>
+  <tr><td>Phrase:</td><td>{{ the_phrase }}</td></tr>
+  <tr><td>Letters:</td><td>{{ the_letters }}</td></tr>
+</table>
+
+<p>When <b>" <u>{{ the_phrase }}</u> "</b> is search for <b>" <u>{{ the_letters }}</u> "</b>, the following results are returned:</p>
+<h3>{{ the_results }}</h3>
+
+{% endblock %}

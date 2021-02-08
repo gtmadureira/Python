@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button onclick="location.href='/entry'" type="button">HOME</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <button onclick="location.href='/logout'" type="button">LOGOUT</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  {{ the_title }}, ' {{ the_user }} ' :
+</h2>
+
+<table>
+  <tr>
+    {% for row_title in the_row_titles %}
+      <th>{{ row_title }}</th>
+    {% endfor %}
+  </tr>
+  {% for log_row in the_data %}
+    <tr>
+      {% for item in log_row %}
+        <td>{{ item }}</td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+</table>
+
+<h2>  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button onclick="location.href='/entry'" type="button">HOME</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <button onclick="location.href='/logout'" type="button">LOGOUT</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+</h2>
+{{ the_error }} {{ the_error_exc }}
+
+{% endblock %}

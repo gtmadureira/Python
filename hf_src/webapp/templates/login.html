@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button onclick="location.href='/entry'" type="button">HOME</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  {{ the_title }}!
+</h2>
+
+<form method="POST" action="/login">
+  <table>
+    <p>Use this form to login :</p>
+    <tr><td align="right">User:</td><td><input name="user" type="TEXT" value="{{ the_user }}"></td></tr>
+    <tr><td align="right">Password:</td><td><input name="password" type="password" value="{{ the_password }}" id="myInput"></td></tr>
+  </table>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" onclick="myFunction()"> Show Password
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <b><i>{{ the_error }}</i></b>
+  </p>
+  <p>When you're ready, click this button:</p>
+  <p><input value="Login !" type="SUBMIT"></p>
+</form>
+
+<script>
+  function myFunction() {
+    var x = document.getElementById("myInput");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+  </script>
+
+{% endblock %}
