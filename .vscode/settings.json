@@ -1,17 +1,6 @@
 {   
     "editor.wordWrap": "on",
 
-    "python.pythonPath": "/home/gustavo/Projects/Python/venv/bin/python",
-
-    "code-runner.executorMap": {
-        "python": "/home/gustavo/Projects/Python/venv/bin/python"
-    },
-    "code-runner.ignoreSelection": true,
-    "code-runner.runInTerminal": true,
-    "code-runner.clearPreviousOutput": true,
-    "code-runner.saveFileBeforeRun": true,
-    "code-runner.fileDirectoryAsCwd": true,    
-
     "python.linting.flake8Enabled": true,
     "python.linting.pylintEnabled": true,
     "python.linting.mypyEnabled": true,
