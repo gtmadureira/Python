@@ -4,8 +4,22 @@
 # Source: https://github.com/gtmadureira/Python/blob/main/hf_src/password_generator.py
 
 
-import random
 import array
+import random
+from platform import system
+from subprocess import check_call as run_command
+
+
+# Tests the operating system type and sets the screen clear command.
+if system() == "Windows":
+
+    def clear() -> None:
+        run_command("cls")
+
+elif system() == "Darwin" or system() == "Linux":
+
+    def clear() -> None:
+        run_command("clear")
 
 
 # Password generator function.
@@ -29,9 +43,10 @@ def passgen(length: int) -> str:
                          'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
                          'Z']
 
-    SYMBOLS = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*',
-               '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?',
-               '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']
+    SYMBOLS = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*',
+               '+', ',', '-', '.', '/', ':', ';', '<', '=', '>',
+               '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|',
+               '}', '~']
 
     # Combines all the character arrays above to form one array.
     COMBINED_LIST = DIGITS + UPCASE_CHARACTERS + LOCASE_CHARACTERS + SYMBOLS
@@ -67,15 +82,25 @@ def passgen(length: int) -> str:
     return password
 
 
-# Asks the user for the length of the password and then returns the result.
-def input_password_length() -> str:
-    length = input("What is the password length ? :  ")
-    try:
-        return passgen(int(length))
-    except:
-        print("Number only! You must enter an integer, so try again.")
-        return input_password_length()
+if __name__ == '__main__':
 
+    clear()
 
-# Print the result on the screen.
-print(input_password_length())
+    # Asks the user for the length of the password and return the result.
+    while True:
+        length = input("What is the password length ? :  ")
+        try:
+            val = int(length)
+            if val < 8 or val > 128:  # if not a positive integer, will print message and ask for input again.
+                clear()
+                print("The input must be from '8' to '128', try again.")
+                continue
+            break
+        except ValueError:
+            clear()
+            print("Number only! You must input an integer, try again.")
+    
+    # Else all is good, val is from '8' to '128' and an integer.
+    clear()
+    print("\n\tHere is your password with '" + str(val) + "' characters of length:\n")
+    print("\n\t" + passgen(val) + "\n\n")
