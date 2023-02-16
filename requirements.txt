@@ -29,5 +29,5 @@ typing-extensions==3.7.4.2
 url-utils==1.0
 urllib3==1.25.9
 vsearch==1.0
-Werkzeug==1.0.1
+Werkzeug==2.2.3
 wrapt==1.12.1
